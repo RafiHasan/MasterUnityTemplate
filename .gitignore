@@ -1,16 +1,16 @@
 ###
 # Unity folders and files
 ###
-*/[Aa]ssets/AssetStoreTools*
-*/[Bb]uild/
-*/[Ll]ibrary/
-*/[Ll]ocal[Cc]ache/
-*/[Oo]bj/
-*/[Tt]emp/
-*/[Uu]nityGenerated/
+*[Aa]ssets/AssetStoreTools*
+*[Bb]uild/
+*[Ll]ibrary/
+*[Ll]ocal[Cc]ache/
+*[Oo]bj/
+*[Tt]emp/
+*[Uu]nityGenerated/
 *[Ff]irebase/
-*/[Ee]ditor/
-*/[Pp]lugins/
+*[Ee]ditor/
+*[Pp]lugins/
 # file on crash reports
 sysinfo.txt
 # Unity3D generated meta files
@@ -20,25 +20,25 @@ sysinfo.txt
 # VS/MD solution and project files
 ###
 [Ee]xportedObj/
-*/*.booproj
-*/*.csproj
-*/*.sln
-*/*.suo
-*/*.svd
-*/*.unityproj
-*/*.user
-*/*.userprefs
-*/*.pidb
-*/.DS_Store
+*.booproj
+*.csproj
+*.sln
+*.suo
+*.svd
+*.unityproj
+*.user
+*.userprefs
+*.pidb
+*.DS_Store
 
 ###
 # OS generated
 ###
-*/.DS_Store
-*/.DS_Store?
-*/._*
-*/.Spotlight-V100
-*/.Trashes
-*/Icon?
-*/ehthumbs.db
-*/Thumbs.db
+*.DS_Store
+*.DS_Store?
+*._*
+*.Spotlight-V100
+*.Trashes
+*Icon?
+*ehthumbs.db
+*Thumbs.db
