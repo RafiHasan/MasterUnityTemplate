@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UIElements;
+using System.Threading.Tasks;
 
-public class IWButton : Button
+public class IWVisualElement : VisualElement
 {
 #if UNITY_EDITOR
     static int SkipFrame = 5;
@@ -14,18 +14,18 @@ public class IWButton : Button
 
     float CalculatedHeight = 0;
     float CalculatedWidth = 0;
-    public new class UxmlFactory : UxmlFactory<IWButton, UxmlTraits>
+    public new class UxmlFactory : UxmlFactory<IWVisualElement, UxmlTraits>
     {
 
     }
-    public new class UxmlTraits : Button.UxmlTraits
+    public new class UxmlTraits : VisualElement.UxmlTraits
     {
         UxmlIWEnumAttributeDescription<ScaleMode> ScaleBy = new UxmlIWEnumAttributeDescription<ScaleMode> { name = "scale-image-by", defaultValue = ScaleMode.NONE };
 
         UxmlBoolAttributeDescription HorizontalCheck = new UxmlBoolAttributeDescription { name = "HorizontalCheck", defaultValue = false };
-        UxmlFloatAttributeDescription Horizontal = new UxmlFloatAttributeDescription { name = "Horizontal", defaultValue = 0.5f};
+        UxmlFloatAttributeDescription Horizontal = new UxmlFloatAttributeDescription { name = "Horizontal", defaultValue = 0.5f };
         UxmlBoolAttributeDescription VerticalCheck = new UxmlBoolAttributeDescription { name = "VerticalCheck", defaultValue = false };
-        UxmlFloatAttributeDescription Vertical = new UxmlFloatAttributeDescription { name = "Vertical", defaultValue = 0.5f};
+        UxmlFloatAttributeDescription Vertical = new UxmlFloatAttributeDescription { name = "Vertical", defaultValue = 0.5f };
         public override IEnumerable<UxmlChildElementDescription> uxmlChildElementsDescription
         {
             get { yield break; }
@@ -38,7 +38,7 @@ public class IWButton : Button
         public override void Init(VisualElement ve, IUxmlAttributes bag, CreationContext cc)
         {
             base.Init(ve, bag, cc);
-            var ate = ve as IWButton;
+            var ate = ve as IWVisualElement;
             ate.ScaleImageBy = ScaleBy.GetValueFromBag(bag, cc);
             ate.Horizontal = Horizontal.GetValueFromBag(bag, cc);
             ate.Vertical = Vertical.GetValueFromBag(bag, cc);
@@ -106,7 +106,7 @@ public class IWButton : Button
         }
     }
 
-    public IWButton()
+    public IWVisualElement()
     {
 
     }
@@ -156,20 +156,20 @@ public class IWButton : Button
     {
         //Debug.Log(width);
         //Debug.Log(height);
-        
-        float widthvalue = scaleMode==ScaleMode.HEIGHT? width : resolvedStyle.width;
+
+        float widthvalue = scaleMode == ScaleMode.HEIGHT ? width : resolvedStyle.width;
 
         float heightvalue = scaleMode == ScaleMode.WIDTH ? height : resolvedStyle.height;
 
-        int align = (int)parent.resolvedStyle.alignItems-1;
+        int align = (int)parent.resolvedStyle.alignItems - 1;
         int justify = (int)parent.resolvedStyle.justifyContent;
 
-        if (parent.resolvedStyle.flexDirection== FlexDirection.Row)
+        if (parent.resolvedStyle.flexDirection == FlexDirection.Row)
         {
             //horizontal -= justify * 0.5f;
             //vertical -= align * 0.5f;
         }
-        else if(parent.resolvedStyle.flexDirection == FlexDirection.RowReverse)
+        else if (parent.resolvedStyle.flexDirection == FlexDirection.RowReverse)
         {
             //horizontal -= justify * 0.5f;
             //vertical -= align * 0.5f;
@@ -182,13 +182,13 @@ public class IWButton : Button
         else if (parent.resolvedStyle.flexDirection == FlexDirection.ColumnReverse)
         {
             //vertical -= justify * 0.5f;
-           // horizontal -= align * 0.5f;
+            // horizontal -= align * 0.5f;
         }
 
-        Debug.Log(name+" "+ style.top + "  "+(parent.resolvedStyle.width/2-widthvalue/2) + "    "+ ( (parent.resolvedStyle.width - widthvalue - resolvedStyle.marginLeft - resolvedStyle.marginRight) * horizontal) +" "+ widthvalue);
+        Debug.Log(name + " " + style.top + "  " + (parent.resolvedStyle.width / 2 - widthvalue / 2) + "    " + ((parent.resolvedStyle.width - widthvalue - resolvedStyle.marginLeft - resolvedStyle.marginRight) * horizontal) + " " + widthvalue);
 
         if (HorizontalCheck && parent.resolvedStyle.flexDirection == FlexDirection.Row)
-            style.left = -resolvedStyle.left+ (parent.resolvedStyle.width - widthvalue - resolvedStyle.marginLeft - resolvedStyle.marginRight) * horizontal;
+            style.left = -resolvedStyle.left + (parent.resolvedStyle.width - widthvalue - resolvedStyle.marginLeft - resolvedStyle.marginRight) * horizontal;
         else if (HorizontalCheck && parent.resolvedStyle.flexDirection == FlexDirection.RowReverse)
             style.left = -resolvedStyle.left + (parent.resolvedStyle.width - widthvalue - resolvedStyle.marginLeft - resolvedStyle.marginRight) * horizontal;
         else if (HorizontalCheck)
