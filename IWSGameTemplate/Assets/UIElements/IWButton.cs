@@ -154,53 +154,18 @@ public class IWButton : Button
 
     public void CalculatePositionOverride(float width, float height, float horizontal, float vertical)
     {
-        //Debug.Log(width);
-        //Debug.Log(height);
-        
         float widthvalue = scaleMode==ScaleMode.HEIGHT? width : resolvedStyle.width;
 
         float heightvalue = scaleMode == ScaleMode.WIDTH ? height : resolvedStyle.height;
 
-        int align = (int)parent.resolvedStyle.alignItems-1;
-        int justify = (int)parent.resolvedStyle.justifyContent;
+        if (HorizontalCheck || verticalcheck)
+            style.position = Position.Absolute;
+        else
+            style.position = resolvedStyle.position;
 
-        if (parent.resolvedStyle.flexDirection== FlexDirection.Row)
-        {
-            //horizontal -= justify * 0.5f;
-            //vertical -= align * 0.5f;
-        }
-        else if(parent.resolvedStyle.flexDirection == FlexDirection.RowReverse)
-        {
-            //horizontal -= justify * 0.5f;
-            //vertical -= align * 0.5f;
-        }
-        else if (parent.resolvedStyle.flexDirection == FlexDirection.Column)
-        {
-            //vertical -= justify * 0.5f;
-            //horizontal -= align * 0.5f;
-        }
-        else if (parent.resolvedStyle.flexDirection == FlexDirection.ColumnReverse)
-        {
-            //vertical -= justify * 0.5f;
-           // horizontal -= align * 0.5f;
-        }
-
-        Debug.Log(name+" "+ style.top + "  "+(parent.resolvedStyle.width/2-widthvalue/2) + "    "+ ( (parent.resolvedStyle.width - widthvalue - resolvedStyle.marginLeft - resolvedStyle.marginRight) * horizontal) +" "+ widthvalue);
-
-        if (HorizontalCheck && parent.resolvedStyle.flexDirection == FlexDirection.Row)
-            style.left = -resolvedStyle.left+ (parent.resolvedStyle.width - widthvalue - resolvedStyle.marginLeft - resolvedStyle.marginRight) * horizontal;
-        else if (HorizontalCheck && parent.resolvedStyle.flexDirection == FlexDirection.RowReverse)
-            style.left = -resolvedStyle.left + (parent.resolvedStyle.width - widthvalue - resolvedStyle.marginLeft - resolvedStyle.marginRight) * horizontal;
-        else if (HorizontalCheck)
+        if (HorizontalCheck)
             style.left = (parent.resolvedStyle.width - widthvalue - resolvedStyle.marginLeft - resolvedStyle.marginRight) * horizontal;
-
-
-
-        if (VerticalCheck && parent.resolvedStyle.flexDirection == FlexDirection.Column)
-            style.top = -resolvedStyle.top + (parent.resolvedStyle.height - heightvalue - resolvedStyle.marginTop - resolvedStyle.marginBottom) * vertical;
-        else if (VerticalCheck && parent.resolvedStyle.flexDirection == FlexDirection.ColumnReverse)
-            style.bottom = -resolvedStyle.bottom + (parent.resolvedStyle.height - heightvalue - resolvedStyle.marginTop - resolvedStyle.marginBottom) * vertical;
-        else if (VerticalCheck)
+        if (VerticalCheck)
             style.top = (parent.resolvedStyle.height - heightvalue - resolvedStyle.marginTop - resolvedStyle.marginBottom) * vertical;
     }
 }
